@@ -2,7 +2,7 @@ resource "azurerm_public_ip" "static" {
   name                         = "${var.prefix}-client-ppip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
-  allocation_method = "Static"
+  allocation_method             = "static"
 }
 
 resource "azurerm_network_interface" "primary" {
@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "primary" {
   ip_configuration {
     name                          = "primary"
     subnet_id                     = "${var.subnet_id}"
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "static"
     public_ip_address_id          = "${azurerm_public_ip.static.id}"
   }
 }
